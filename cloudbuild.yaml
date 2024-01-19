@@ -1,0 +1,7 @@
+steps:
+  
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/tetris-411711/game_image:latest', '.']
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/tetris-411711/game_image:latest']
