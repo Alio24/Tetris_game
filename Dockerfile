@@ -1,13 +1,20 @@
-FROM python:3.9
+# Use the official MySQL image as the base image
+FROM mysql:latest
 
-ENV APP_HOME /app
-WORKDIR $APP_HOME
+# Environment variables for MySQL configuration
+ENV MYSQL_ROOT_PASSWORD=root_password
+ENV MYSQL_DATABASE=mydatabase
+ENV MYSQL_USER=myuser
+ENV MYSQL_PASSWORD=mypassword
 
-#RUN apt-get update
-COPY requirements.txt .
+# Copy SQL scripts to initialize the database
+COPY ./Database.sql/ /docker-entrypoint-initdb.d/
 
-RUN pip install -r requirements.txt
+# Expose the MySQL port
+EXPOSE 3306
 
-COPY . .
+# Additional configurations if needed
+# ...
 
-CMD ["python3", "ai.py"]
+# Command to run MySQL server
+CMD ["mysqld"]
